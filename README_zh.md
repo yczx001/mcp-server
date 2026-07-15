@@ -35,10 +35,14 @@ Cline 使用华为云eip MCP Server 创建和删除eip实例的全过程。
 
 ### 2. 环境变量设置
 
-准备AK、SK并设置到环境变量
+准备 AK、SK 并设置到环境变量
 
 - ak 环境变量名:  HUAWEI_ACCESS_KEY
 - sk 环境变量名:  HUAWEI_SECRET_KEY
+- project_id 环境变量名:  HUAWEI_PROJECT_ID（可选，部分服务需要）
+- region 环境变量名:  HUAWEI_REGION（可选，默认为 cn-north-4）
+
+> **注意**：`HUAWEI_PROJECT_ID` 必须与 AK/SK 所属的项目匹配，否则会导致认证失败（401 错误）。可在华为云控制台的"我的凭证"中查看项目 ID。
 
 ![img.png](images/img.png)
 

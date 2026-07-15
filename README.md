@@ -42,6 +42,10 @@ Prepare AK and SK and set them to environment variables
 
 - ak environment variable name: HUAWEI_ACCESS_KEY
 - sk environment variable name: HUAWEI_SECRET_KEY
+- project_id environment variable name: HUAWEI_PROJECT_ID (optional, required by some services)
+- region environment variable name: HUAWEI_REGION (optional, defaults to cn-north-4)
+
+> **Note**: `HUAWEI_PROJECT_ID` must match the project that the AK/SK belongs to, otherwise authentication will fail (401 error). You can find the project ID in "My Credentials" on the Huawei Cloud console.
 
 ![img.png](images/img.png)
 
