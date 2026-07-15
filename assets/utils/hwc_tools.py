@@ -17,6 +17,7 @@ from .model import MCPConfig, TransportType
 from .variable import (
     HUAWEI_ACCESS_KEY,
     HUAWEI_SECRET_KEY,
+    HUAWEI_PROJECT_ID,
     MCP_SERVER_MODE,
     MCP_SERVER_PORT,
 )
@@ -160,7 +161,7 @@ class CustomClient(Client):
         return response
 
 
-def create_api_client(ak, sk, x_host, region="cn-north-4"):
+def create_api_client(ak, sk, x_host, region="cn-north-4", project_id=None):
     endpoint = x_host
 
     if x_host.find("com") != -1:
@@ -169,7 +170,7 @@ def create_api_client(ak, sk, x_host, region="cn-north-4"):
     if endpoint.find("{region}") != -1:
         endpoint = endpoint.replace("{region}", region)
 
-    credentials = BasicCredentials(ak, sk)
+    credentials = BasicCredentials(ak, sk, project_id)
 
     http_config = HttpConfig()
     http_config.ignore_ssl_verification = True
@@ -269,11 +270,13 @@ def load_config(config_path: Union[str, Path]) -> MCPConfig:
             port=config_dict.get("port", 8888),
             ak=config_dict.get("ak", ""),
             sk=config_dict.get("sk", ""),
+            project_id=config_dict.get("project_id", ""),
         )
 
         env_mapping = [
             (HUAWEI_ACCESS_KEY, "ak", None, None),
             (HUAWEI_SECRET_KEY, "sk", None, None),
+            (HUAWEI_PROJECT_ID, "project_id", None, None),
             (MCP_SERVER_MODE, "transport", None, get_args(TransportType)),
             (MCP_SERVER_PORT, "port", int, None),
         ]

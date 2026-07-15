@@ -122,11 +122,13 @@ class MCPServer:
         async def call_tool(
             name: str, arguments: dict
         ) -> list[TextContent | ImageContent | EmbeddedResource]:
-            region = arguments.get("region") or "cn-north-4"
+            import os
+            region = arguments.get("region") or os.environ.get("HUAWEI_REGION") or "cn-north-4"
             x_host = self.openapi_dict["info"]["x-host"]
 
             ak = self.config.ak
             sk = self.config.sk
+            project_id = self.config.project_id
 
             if not ak or not sk:
                 error_msg = {
@@ -135,7 +137,7 @@ class MCPServer:
                 }
                 raise ToolError(error_msg)
 
-            client = create_api_client(ak, sk, x_host, region)
+            client = create_api_client(ak, sk, x_host, region, project_id)
             try:
                 arguments = filter_parameters(arguments)
 

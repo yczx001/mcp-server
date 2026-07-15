@@ -4,7 +4,8 @@
     "description" : "DLI-动态脱敏策略相关API",
     "title" : "DLI",
     "version" : "2025-06-13",
-    "x-host_prefix": "dli"
+    "x-host_prefix": "dli",
+    "x-host" : "dli.{region}.myhuaweicloud.com"
   },
   "servers" : [ {
     "url" : "/"
